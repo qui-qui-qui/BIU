@@ -5,6 +5,8 @@ export default class MiniSlider extends Slider {
         super(container, next, prev, activeClass, animate, autoplay);
     }
 
+    
+
     decorizeSlides() {
         this.slides.forEach(slide => {
             slide.classList.remove(this.activeClass);
@@ -41,6 +43,7 @@ export default class MiniSlider extends Slider {
         
         this.decorizeSlides();
     }
+    
 
     bindTriggers() {
         let lastNum;
@@ -61,18 +64,20 @@ export default class MiniSlider extends Slider {
     }
 
     init() {
-        this.container.style.cssText = `
+        try {
+            this.container.style.cssText = `
             display: flex;
             flex-wrap: wrap;
             overflow: hidden;
             align-items: flex-start;
-        `;
+            `;
 
-        this.bindTriggers();
-        this.decorizeSlides();
+            this.bindTriggers();
+            this.decorizeSlides();
 
-        if (this.autoplay) {
-            setInterval(() => this.nextSlide(), 5000);
-        }
+            if (this.autoplay) {
+                setInterval(() => this.nextSlide(), 5000);
+            }
+        } catch(e) {}
     }
 }
